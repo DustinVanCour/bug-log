@@ -1,9 +1,8 @@
 <template>
   <form @submit.prevent="handleSubmit" class="NotesForm">
     <div class="form-group">
-      <input class="form-control" type="text" placeholder="Bug Name" v-model="title">
-      <input class="form-control" type="text" placeholder="Creator" v-model="creator">
-      <input class="form-control" type="text" placeholder="Bug Description" v-model="description">
+      <input class="form-control" type="text" placeholder="User" v-model="creator">
+      <input class="form-control" type="text" placeholder="Message" v-model="content">
       <input class="btn btn-success btn-sm" type="submit" value="Submit">
     </div>
   </form>
@@ -12,25 +11,23 @@
 
 
 <script>
-export default {
-  name: "NotesForm",
-  data() {
-    return {
-      title: "",
-      creator: "",
-      description: ""
-    };
-  },
-
-  methods: {
-    handleSubmit() {
-      let data = {
-        creator: this.creator,
-        description: this.description,
-        title: this.title
+  export default {
+    name: "NotesForm",
+    data() {
+      return {
+        creator: "",
+        content: ""
       };
-      this.$store.dispatch("createBug", data);
+    },
+
+    methods: {
+      handleSubmit() {
+        let data = {
+          creator: this.creator,
+          content: this.content,
+        };
+        this.$store.dispatch("createNote", data);
+      }
     }
-  }
-};
+  };
 </script>

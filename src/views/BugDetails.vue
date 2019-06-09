@@ -22,29 +22,34 @@
         </li>
       </ul>
     </div>
+    <br>
+    <br>
     <div>
-      <!-- <NotesForm/> -->
+      <h4>Add Note</h4>
+      <NotesForm />
       <!-- <BugNotes/> -->
     </div>
   </div>
 </template>
 
 <script>
-// import BugNotes from "@/componenets/BugNotes.vue";
-// import NotesForm from "@/components/NotesForm.vue";
+  // import BugNotes from "@/componenets/BugNotes.vue";
+  import NotesForm from "@/components/NotesForm.vue"
 
-export default {
-  name: "BugDetails",
-  props: ["id"],
-  mounted() {
-    this.$store.dispatch("getBugById", this.id);
-  },
-  computed: {
-    bug() {
-      return this.$store.state.bug;
+  export default {
+    name: "BugDetails",
+    props: ["id"],
+    mounted() {
+      this.$store.dispatch("getBugById", this.id);
+    },
+    computed: {
+      bug() {
+        return this.$store.state.bug;
+      }
+    },
+    methods: {},
+    components: {
+      NotesForm,
     }
-  },
-  methods: {},
-  components: {}
-};
+  };
 </script>
