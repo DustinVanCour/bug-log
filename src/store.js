@@ -3,7 +3,7 @@ import Vuex from 'vuex'
 import axios from 'axios'
 
 var _api = axios.create({
-  baseURL: 'http://bcw-sandbox.herokuapp.com/api/dustintest'
+  baseURL: 'http://bcw-sandbox.herokuapp.com/api/dustintest/bugs'
 })
 
 
@@ -34,7 +34,7 @@ export default new Vuex.Store({
     // --- HOME ACTIONS ---
     async getBugs({ commit, dispatch }) {
       try {
-        let res = await _api.get('bugs')
+        let res = await _api.get('')
         console.log(res.data)
         commit('setBugs', res.data.results)
       } catch (error) {
@@ -43,7 +43,7 @@ export default new Vuex.Store({
     },
 
     createBug({ commit, dispatch }, payload) {
-      _api.post('bugs', payload)
+      _api.post('', payload)
         .then(resp => {
           dispatch('getBugs')
         })
@@ -51,13 +51,14 @@ export default new Vuex.Store({
     },
 
     async getBugById({ commit, dispatch }, id) {
-      let res = await _api.get('bugs/' + id)
+      let res = await _api.get(id)
       commit('setBug', res.data.results)
     },
+
     // --- NOTES ACTIONS---
-    async getNotes({ commit, dispatch }) {
+    async getNotes({ commit, state }) {
       try {
-        let res = await _api.get('notes')
+        let res = await _api.get(state.bug._id + '/notes')
         console.log(res.data)
         commit('setNotes', res.data.results)
       } catch (error) {
@@ -65,17 +66,17 @@ export default new Vuex.Store({
       }
     },
 
-    createNote({ commit, dispatch }, payload) {
-      _api.post('bugs/:id/notes', payload)
+    createNote({ commit, dispatch, state }, payload) {
+      _api.post(state.bug._id + '/notes/', payload)
         .then(resp => {
           dispatch('getNotes')
         })
         .catch(err => console.error(err))
     },
 
-    async getNoteById({ commit, dispatch }, id) {
-      let res = await _api.get('bugs/:id/notes' + id)
+    async getNoteById({ commit, dispatch, state }, id) {
+      let res = await _api.get(state.bug._id + '/notes/' + id)
       commit('setNote', res.data.results)
-    },
+    }
   }
 })

@@ -1,22 +1,23 @@
 <template>
   <div class="home container">
-    <BugForm />
-    <BugList />
+    <bug-form/>
+    <bug-list/>
   </div>
 </template>
 
 <script>
-  import BugList from '@/components/BugList.vue';
-  import BugForm from '@/components/BugForm.vue'
+import BugList from "@/components/BugList.vue";
+import BugForm from "@/components/BugForm.vue";
 
-  export default {
-    name: 'home',
-    mounted() {
-      this.$store.dispatch('getBugs')
-    },
-    components: {
-      BugList,
-      BugForm
-    }
+export default {
+  name: "home",
+  mounted() {
+    debugger;
+    this.$store.dispatch("getBugs");
+  },
+  components: {
+    BugList,
+    BugForm
   }
+};
 </script>

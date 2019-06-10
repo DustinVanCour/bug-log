@@ -1,28 +1,30 @@
 <template>
-  <table class="table table-hover">
-    <thead>
-      <tr>
-        <th scope="col">Title</th>
-        <th scope="col">By</th>
-        <th scope="col">Status</th>
-        <th scope="col">Date/Time</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr v-for="bug in bugs" :key="bug._id">
-        <td>{{bug.title}}</td>
-        <td>{{bug.creator}}</td>
-        <td>{{bug.closed}}</td>
-        <td>{{new Date(bug.createdAt).toLocaleDateString()}}</td>
-        <td>
-          <router-link
-            class="btn btn-primary btn-sm"
-            :to="{ name: 'BugDetails', params: { id: bug._id } }"
-          >Details</router-link>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <div>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">Title</th>
+          <th scope="col">By</th>
+          <th scope="col">Status</th>
+          <th scope="col">Date/Time</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="bug in bugs" :key="bug._id">
+          <td>{{bug.title}}</td>
+          <td>{{bug.creator}}</td>
+          <td>{{bug.closed}}</td>
+          <td>{{new Date(bug.createdAt).toLocaleDateString()}}</td>
+          <td>
+            <router-link
+              class="btn btn-primary btn-sm"
+              :to="{ name: 'BugDetails', params: { id: bug._id } }"
+            >Details</router-link>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </template>
 
 <script>

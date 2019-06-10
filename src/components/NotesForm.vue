@@ -11,23 +11,25 @@
 
 
 <script>
-  export default {
-    name: "NotesForm",
-    data() {
-      return {
-        creator: "",
-        content: ""
-      };
-    },
+export default {
+  name: "NotesForm",
+  data() {
+    return {
+      creator: "",
+      content: "",
+      bug: this.$store.state.bug._id
+    };
+  },
 
-    methods: {
-      handleSubmit() {
-        let data = {
-          creator: this.creator,
-          content: this.content,
-        };
-        this.$store.dispatch("createNote", data);
-      }
+  methods: {
+    handleSubmit() {
+      let data = {
+        creator: this.creator,
+        content: this.content
+      };
+      this.$store.dispatch("createNote", data);
     }
-  };
+  },
+  computed: {}
+};
 </script>

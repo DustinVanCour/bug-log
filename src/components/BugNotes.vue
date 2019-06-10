@@ -1,18 +1,43 @@
 <template>
-  <div class="BugNotes container">
-    <h1>BUG NOTES GO HERE</h1>
-  </div>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">By</th>
+        <th scope="col">Comment</th>
+        <th scope="col">Created</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr v-for="note in notes" :key="note._id">
+        <td>{{note.creator}}</td>
+        <td>{{note.content}}</td>
+        <td>{{new Date(note.createdAt).toLocaleDateString()}}</td>
+        <!-- <td>
+          <router-link
+            class="btn btn-primary btn-sm"
+            :to="{ name: 'BugDetails', params: { id: note._id } }"
+          >Details</router-link>
+        </td>-->
+      </tr>
+    </tbody>
+  </table>
 </template>
 
 <script>
 export default {
   name: "BugNotes",
-  props: [],
   data() {
     return {};
   },
-  computed: {},
-  methods: {},
-  components: {}
+  computed: {
+    notes() {
+      return this.$store.state.notes;
+    }
+  }
 };
 </script>
+
+<style>
+</style>
+
+
