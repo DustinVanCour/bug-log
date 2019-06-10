@@ -3,7 +3,7 @@ import Vuex from 'vuex'
 import axios from 'axios'
 
 var _api = axios.create({
-  baseURL: 'http://bcw-sandbox.herokuapp.com/api/dustintest/bugs'
+  baseURL: 'https://bcw-sandbox.herokuapp.com/api/dustintest/bugs'
 })
 
 
