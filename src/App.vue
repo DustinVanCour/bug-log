@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div id="nav">
-      <h1>Bug Logger 5000</h1>
+      <img src="./assets/bug-logger-logo.png" alt="Bug Logger 5000!" id="logo">
     </div>
     <router-view />
   </div>
@@ -27,5 +27,10 @@
 
   #nav a.router-link-exact-active {
     color: #42b983;
+  }
+
+  #logo {
+    width: 35%;
+    height: 35%;
   }
 </style>

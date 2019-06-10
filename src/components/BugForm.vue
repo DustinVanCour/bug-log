@@ -38,5 +38,9 @@
 
 
 <style>
+  form {
+    margin: 0 auto;
+    width: 40rem;
 
+  }
 </style>
