@@ -5,6 +5,7 @@
         <th scope="col">By</th>
         <th scope="col">Comment</th>
         <th scope="col">Created</th>
+        <th scope="col"></th>
       </tr>
     </thead>
     <tbody>
@@ -12,12 +13,11 @@
         <td>{{note.creator}}</td>
         <td>{{note.content}}</td>
         <td>{{new Date(note.createdAt).toLocaleDateString()}}</td>
-        <!-- <td>
-          <router-link
-            class="btn btn-primary btn-sm"
-            :to="{ name: 'BugDetails', params: { id: note._id } }"
-          >Details</router-link>
-        </td>-->
+        <td>
+          <button class="btn btn-danger" @click="deleteNote(note._id)">
+            <i class="fas fa-trash-alt"></i>
+          </button>
+        </td>
       </tr>
     </tbody>
   </table>
@@ -32,6 +32,11 @@ export default {
   computed: {
     notes() {
       return this.$store.state.notes;
+    }
+  },
+  methods: {
+    deleteNote(id) {
+      this.$store.dispatch("deleteNoteById", id);
     }
   }
 };

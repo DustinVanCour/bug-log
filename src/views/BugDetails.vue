@@ -21,6 +21,12 @@
             <strong>Date Created:</strong>
             {{new Date(bug.createdAt).toLocaleDateString()}}
           </li>
+          <li class="list-group-item">
+            <strong>Mark as Complete:</strong>
+            <button class="btn btn-success btn-sm complete-btn">
+              <i class="fas fa-clipboard-check"></i>
+            </button>
+          </li>
         </ul>
       </div>
     </div>
@@ -28,44 +34,48 @@
     <br>
     <div>
       <h4 class="add-note">Add Note</h4>
-      <NotesForm />
-      <BugNotes />
+      <NotesForm/>
+      <BugNotes/>
     </div>
   </div>
 </template>
 
 <script>
-  import BugNotes from "@/components/BugNotes.vue";
-  import NotesForm from "@/components/NotesForm.vue";
+import BugNotes from "@/components/BugNotes.vue";
+import NotesForm from "@/components/NotesForm.vue";
 
-  export default {
-    name: "BugDetails",
-    props: ["id"],
-    mounted() {
-      this.$store.dispatch("getBugById", this.id);
-      this.$store.dispatch("getNotes");
-    },
-    computed: {
-      bug() {
-        return this.$store.state.bug;
-      }
-    },
-    methods: {},
-    components: {
-      NotesForm,
-      BugNotes
+export default {
+  name: "BugDetails",
+  props: ["id"],
+  mounted() {
+    this.$store.dispatch("getBugById", this.id);
+    this.$store.dispatch("getNotes", this.id);
+  },
+  computed: {
+    bug() {
+      return this.$store.state.bug;
     }
-  };
+  },
+  methods: {},
+  components: {
+    NotesForm,
+    BugNotes
+  }
+};
 </script>
 
 <style>
-  .card-style {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+.card-style {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-  .add-note {
-    color: white;
-  }
+.add-note {
+  color: white;
+}
+
+.complete-btn {
+  margin-left: 1rem;
+}
 </style>

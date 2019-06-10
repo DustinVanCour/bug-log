@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
+import { stat } from 'fs';
 
 var _api = axios.create({
   baseURL: 'https://bcw-sandbox.herokuapp.com/api/dustintest/bugs'
@@ -56,9 +57,9 @@ export default new Vuex.Store({
     },
 
     // --- NOTES ACTIONS---
-    async getNotes({ commit, state }) {
+    async getNotes({ commit, state }, id) {
       try {
-        let res = await _api.get(state.bug._id + '/notes')
+        let res = await _api.get(id + '/notes')
         console.log(res.data)
         commit('setNotes', res.data.results)
       } catch (error) {
@@ -69,7 +70,7 @@ export default new Vuex.Store({
     createNote({ commit, dispatch, state }, payload) {
       _api.post(state.bug._id + '/notes/', payload)
         .then(resp => {
-          dispatch('getNotes')
+          dispatch('getNotes', state.bug._id) // don't forget to pass the bug id here
         })
         .catch(err => console.error(err))
     },
@@ -77,6 +78,27 @@ export default new Vuex.Store({
     async getNoteById({ commit, dispatch, state }, id) {
       let res = await _api.get(state.bug._id + '/notes/' + id)
       commit('setNote', res.data.results)
-    }
-  }
+    },
+
+    async deleteNoteById({ commit, dispatch, state }, id) {
+      _api.delete(state.bug._id + '/notes/' + id)
+        .then(resp => {
+          dispatch('getNotes', state.bug._id) // don't forget to pass the bug id here
+        })
+        .catch(err => console.error(err))
+    },
+
+
+
+    // let res = await _api.delete(state.bug._id + '/notes/' + id)
+    // console.log("Delete Note", res),
+    //   .then(resp => {
+    //     dispatch('getNotes', state.bug._id) // don't forget to pass the bug id here
+    //   })
+    //   .catch(err => console.error(err))
+    // Two options
+    // 1. remove the note from notes in state with the id id
+    //      this is entirely front end and involves a new mutation
+    // 2. dispatch getNotes and pass the bug Id
+  },
 })
