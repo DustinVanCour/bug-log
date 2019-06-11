@@ -17,8 +17,10 @@
           <td>{{bug.closed}}</td>
           <td>{{new Date(bug.createdAt).toLocaleDateString()}}</td>
           <td>
-            <router-link class="btn btn-success btn-sm" :to="{ name: 'BugDetails', params: { id: bug._id } }">Details
-            </router-link>
+            <router-link
+              class="btn btn-success btn-sm"
+              :to="{ name: 'BugDetails', params: { id: bug._id } }"
+            >Details</router-link>
           </td>
         </tr>
       </tbody>
@@ -27,27 +29,27 @@
 </template>
 
 <script>
-  export default {
-    name: "BugList",
-    data() {
-      return {};
-    },
-    computed: {
-      bugs() {
-        return this.$store.state.bugs;
-      }
+export default {
+  name: "BugList",
+  data() {
+    return {};
+  },
+  computed: {
+    bugs() {
+      return this.$store.state.bugs;
     }
-  };
+  }
+};
 </script>
 
 <style>
-  .table tbody {
-    color: white;
-    background-color: rgba(0, 0, 0, 0.459);
-  }
+.table tbody {
+  color: white;
+  background-color: rgba(0, 0, 0, 0.459);
+}
 
-  .table thead {
-    color: rgb(255, 255, 255);
-    background-color: rgba(0, 0, 0, 0.794);
-  }
+.table thead {
+  color: rgb(255, 255, 255);
+  background-color: rgba(0, 0, 0, 0.794);
+}
 </style>

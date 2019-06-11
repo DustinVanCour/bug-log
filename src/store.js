@@ -51,6 +51,14 @@ export default new Vuex.Store({
         .catch(err => console.error(err))
     },
 
+    async markComplete({ commit, dispatch, state }, id) {
+      _api.delete(id)
+        .then(resp => {
+          dispatch('getBugById')
+        })
+        .catch(err => console.error(err))
+    },
+
     async getBugById({ commit, dispatch }, id) {
       let res = await _api.get(id)
       commit('setBug', res.data.results)
@@ -83,19 +91,11 @@ export default new Vuex.Store({
     async deleteNoteById({ commit, dispatch, state }, id) {
       _api.delete(state.bug._id + '/notes/' + id)
         .then(resp => {
-          dispatch('getNotes', state.bug._id) // don't forget to pass the bug id here
+          dispatch('getNotes', state.bug._id)
         })
         .catch(err => console.error(err))
     },
 
-
-
-    // let res = await _api.delete(state.bug._id + '/notes/' + id)
-    // console.log("Delete Note", res),
-    //   .then(resp => {
-    //     dispatch('getNotes', state.bug._id) // don't forget to pass the bug id here
-    //   })
-    //   .catch(err => console.error(err))
     // Two options
     // 1. remove the note from notes in state with the id id
     //      this is entirely front end and involves a new mutation

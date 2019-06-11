@@ -23,7 +23,7 @@
           </li>
           <li class="list-group-item">
             <strong>Mark as Complete:</strong>
-            <button class="btn btn-success btn-sm complete-btn">
+            <button class="btn btn-success complete-btn" @click="markComplete(bug._id)">
               <i class="fas fa-clipboard-check"></i>
             </button>
           </li>
@@ -56,7 +56,11 @@ export default {
       return this.$store.state.bug;
     }
   },
-  methods: {},
+  methods: {
+    markComplete(id) {
+      this.$store.dispatch("markComplete", id);
+    }
+  },
   components: {
     NotesForm,
     BugNotes
