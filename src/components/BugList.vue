@@ -11,10 +11,11 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="bug in bugs" :key="bug._id">
+        <tr v-for="bug in bugs" :key="bug._id" :class="{closed: bug.closed}">
           <td>{{bug.title}}</td>
           <td>{{bug.creator}}</td>
-          <td>{{bug.closed}}</td>
+          <td v-if="bug.closed">Closed</td>
+          <td v-else>Open</td>
           <td>{{new Date(bug.createdAt).toLocaleDateString()}}</td>
           <td>
             <router-link
@@ -51,5 +52,9 @@ export default {
 .table thead {
   color: rgb(255, 255, 255);
   background-color: rgba(0, 0, 0, 0.794);
+}
+
+.closed {
+  background-color: rgba(255, 0, 0, 0.239);
 }
 </style>

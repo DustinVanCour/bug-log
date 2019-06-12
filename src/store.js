@@ -4,7 +4,7 @@ import axios from 'axios'
 import { stat } from 'fs';
 
 var _api = axios.create({
-  baseURL: 'https://bcw-sandbox.herokuapp.com/api/dustintest/bugs'
+  baseURL: 'https://bcw-sandbox.herokuapp.com/api/dustin/bugs'
 })
 
 
@@ -54,7 +54,7 @@ export default new Vuex.Store({
     async markComplete({ commit, dispatch, state }, id) {
       _api.delete(id)
         .then(resp => {
-          dispatch('getBugById')
+          dispatch('getBugById', id)
         })
         .catch(err => console.error(err))
     },

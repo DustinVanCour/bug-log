@@ -23,9 +23,16 @@
           </li>
           <li class="list-group-item">
             <strong>Mark as Complete:</strong>
-            <button class="btn btn-success complete-btn" @click="markComplete(bug._id)">
+            <button
+              class="btn btn-success complete-btn"
+              @click="markComplete(bug._id)"
+              v-if="!bug.closed"
+            >
               <i class="fas fa-clipboard-check"></i>
             </button>
+            <h1 class="checkmark" v-else>
+              <i class="fas fa-check"></i>
+            </h1>
           </li>
         </ul>
       </div>
@@ -81,5 +88,36 @@ export default {
 
 .complete-btn {
   margin-left: 1rem;
+}
+
+.checkmark {
+  color: green;
+
+  -webkit-animation: appear 3s ease 0s 1 normal;
+  animation: appear 3s ease 0s 1 normal;
+}
+
+@-webkit-keyframes appear {
+  0% {
+    opacity: 0;
+    -webkit-transform: scale3d(0.3, 0.3, 0.3);
+    transform: scale3d(0.3, 0.3, 0.3);
+  }
+  32% {
+    opacity: 1;
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+@keyframes appear {
+  0% {
+    opacity: 0;
+    transform: scale3d(0.3, 0.3, 0.3);
+  }
+  40% {
+    opacity: 1;
+    transform: scale3d(1, 1, 1);
+  }
 }
 </style>
